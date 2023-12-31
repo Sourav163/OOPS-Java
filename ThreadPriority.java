@@ -20,11 +20,11 @@ public class ThreadPriority {
         MyThread5 th3 = new MyThread5("Sourav-3");
         MyThread5 th4 = new MyThread5("Sourav-4");
         MyThread5 th5 = new MyThread5("Sourav-5 (Most Important)");
-        th5.setPriority(Thread.MAX_PRIORITY);
         th1.setPriority(Thread.MIN_PRIORITY);
-        th2.setPriority(Thread.MIN_PRIORITY);
-        th3.setPriority(Thread.MIN_PRIORITY);
-        th4.setPriority(Thread.MIN_PRIORITY);
+        th2.setPriority(Thread.NORM_PRIORITY);
+        th3.setPriority(Thread.NORM_PRIORITY);
+        th4.setPriority(Thread.NORM_PRIORITY);
+        th5.setPriority(Thread.MAX_PRIORITY);
         th1.start();
         th2.start();
         th3.start();
