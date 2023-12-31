@@ -22,7 +22,7 @@ class Thread2 extends Thread {
     }
 }
 
-public class MultiThreading {
+public class ThreadClass {
     public static void main(String[] args) {
         Thread1 th1 = new Thread1();
         Thread2 th2 = new Thread2();
