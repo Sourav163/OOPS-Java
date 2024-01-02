@@ -25,6 +25,16 @@ class ArrayIndexOutOfBounds5Exception extends Exception {
 }
 
 public class PracticeSet_14 {
+    public static void methodThrowsException() {
+        try {
+            throw new ArrayIndexOutOfBounds5Exception();
+        }
+        catch(ArrayIndexOutOfBounds5Exception e5) {
+            System.out.println(e5.getMessage());
+            System.out.println(e5.toString());
+        }
+    }
+
     public static void main(String[] args) {
         // 1. Demonstrate 3 Types of Errors - Syntax/Compilation, Logical, Runtime :
 //        Syntax / Compilation Error :
@@ -133,7 +143,7 @@ public class PracticeSet_14 {
                 catch(ArrayIndexOutOfBoundsException e) {
                     intCheck5++;
                     if(intCheck5 == 5) {
-
+                        methodThrowsException();
                     }
                     else {
                         System.out.println("\nInvalid Index :(");
