@@ -18,86 +18,73 @@ import java.util.Scanner;
 
 class MaxInputException extends Exception {
     public String getMessage() {
-        return "Exception :  Number is greater than 100000, exceeds calculating limit :(";
+        return "\nException :  Number is greater than 100000, exceeds calculating limit :(";
     }
 }
 
 class InvalidOperationException extends Exception {
     public String getMessage() {
-        return "Exception :  You have entered invalid operation :(";
+        return "\nException :  You have entered invalid operation :(";
     }
 }
 
 class MaxMultiplierReachedException extends Exception {
     public String getMessage() {
-        return "Exception :  Number is greater than 7000, exceeds Multiplication limit :(";
+        return "\nException :  Number is greater than 7000, exceeds Multiplication limit :(";
     }
 }
 
 public class Exercise_06 {
     public static void main(String[] args) {
-        System.out.println("Simple Calculator having only Operations :  +, -, *, /");
+        System.out.println("\nSimple Calculator having only Operations :  +, -, *, /");
 
-        Scanner sc = new Scanner(System.in);
         boolean numBool = true;
+        int countOprInput = 0;
 
         while(numBool) {
             try {
-                System.out.print("Enter Your 1st Number :  ");
-                int num1 = sc.nextInt();
-                if(num1 > 100000) {
-                    try {
-                        throw new MaxInputException();
-                    }
-                    catch(MaxInputException e) {
-                        System.out.println(e.getMessage());
-                    }
-                }
-                System.out.print("Enter Your 2nd Number :  ");
-                int num2 = sc.nextInt();
-                if(num2 > 100000) {
-                    try {
-                        throw new MaxInputException();
-                    }
-                    catch(MaxInputException e) {
-                        System.out.println(e.getMessage());
-                    }
-                }
+                Scanner sc = new Scanner(System.in);
+                System.out.println("\nEnter Two Numbers :");
 
+                int num1 = sc.nextInt();
+                int num2 = sc.nextInt();
+                if(num1 > 100000 || num2 > 100000)
+                    throw new MaxInputException();
+
+                numBool = false;
                 boolean oprBool = true;
                 while(oprBool) {
                     System.out.print("Enter The Operation :  ");
+
+                    if(countOprInput == 0)
+                        sc.nextLine();
                     String opr = sc.nextLine();
+
                     switch (opr) {
                         case "+":
-                            System.out.println("Addition :  " + num1 + " + " + num2 + " = " + (num1+num2));
+                            System.out.println("\nAddition :  " + num1 + " + " + num2 + " = " + (num1+num2));
                             oprBool = false;
                             break;
                         case "-":
-                            System.out.println("Subtraction :  " + num1 + " - " + num2 + " = " + (num1-num2));
+                            System.out.println("\nSubtraction :  " + num1 + " - " + num2 + " = " + (num1-num2));
                             oprBool = false;
                             break;
                         case "*":
-                            try {
-                                if(num1 > 7000 || num2 > 7000)
-                                    throw new MaxMultiplierReachedException();
-                            }
-                            catch(Exception e) {
-                                System.out.println(e.getMessage());
-                            }
-                            System.out.println("Multiplication :  " + num1 + " * " + num2 + " = " + (num1*num2));
+                            if(num1 > 7000 || num2 > 7000)
+                                throw new MaxMultiplierReachedException();
+
+                            System.out.println("\nMultiplication :  " + num1 + " * " + num2 + " = " + (num1*num2));
                             oprBool = false;
                             break;
                         case "/":
-                            try {
-                                System.out.println("Division :  " + num1 + " / " + num2 + " = " + (Math.round((double) num1 / num2 * 100) / 100.0));
-                                oprBool = false;
-                            }
-                            catch(ArithmeticException e) {
-                                System.out.println("Exception :  Can't be divided by 0 :(");
-                            }
+                            if(num2 == 0)
+                                throw new ArithmeticException();
+
+                            System.out.println("\nDivision :  " + num1 + " / " + num2 + " = " + (Math.round((double) num1 / num2 * 100) / 100.0));
+                            oprBool = false;
                             break;
                         default:
+                            countOprInput++;
                             try {
                                 throw new InvalidOperationException();
                             }
@@ -108,9 +95,19 @@ public class Exercise_06 {
                 }
             }
             catch(InputMismatchException e) {
-                System.out.println("Exception :  You have entered invalid number :(");
+                System.out.println("\nException :  You have entered invalid number :(");
             }
-            numBool = false;
+            catch(MaxInputException e) {
+                System.out.println(e.getMessage());
+            }
+            catch(MaxMultiplierReachedException e) {
+                System.out.println(e.getMessage());
+                numBool = true;
+            }
+            catch(ArithmeticException e) {
+                System.out.println("\nException :  Can't be divided by 0 :(");
+                numBool = true;
+            }
         }
     }
 }
